@@ -3,8 +3,14 @@ on: [push]
 
 jobs:
   hello_world_job:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     name: A job to say hello
+    strategy:
+      # To test across multiple language versions
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest ]
+        node-version: [12.x, 14.x]
+        
     steps:
       # To use this repository's private action, you must check out the repository
       - name: Checkout
